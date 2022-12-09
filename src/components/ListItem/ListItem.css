@@ -1,0 +1,25 @@
+.list_item {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 15px;
+  border-bottom: 1px solid #ebebeb;
+}
+.list_item_check {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ebebeb;
+  border-radius: 50%;
+  line-height: 30px;
+}
+.list_item_icon {
+  display: none;
+  color: #a9c9a9;
+}
+.list_item.completed .list_item_icon {
+  display: inline;
+}
+.list_item.completed .list_item_title {
+  color: #ebebeb;
+  text-decoration: line-through;
+}

@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  border-bottom: 3px solid #ebebeb;
+}
+.form_icon {
+  color: #ebebeb;
+}
+.form_input {
+  flex-grow: 1;
+}
+.form_input::placeholder {
+  color: #ebebeb;
+  font-style: italic;
+}
