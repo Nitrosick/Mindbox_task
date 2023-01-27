@@ -8,8 +8,7 @@ export interface ListItemProps {
     id: number;
     completed: boolean;
     title: string;
-    tasks: Task[];
-    setTasks: (tasks: Task[]) => void;
+    setCompleted: (id: number) => void;
 }
 
 export interface FiltersProps {
@@ -20,6 +19,11 @@ export interface FiltersProps {
 }
 
 export interface FormProps {
-    tasks: Task[];
-    setTasks: (tasks: Task[]) => void;
+    addTask: (value: string) => void;
+}
+
+export enum FilterValues {
+    All = 'all',
+    Active = 'active',
+    Completed = 'completed'
 }

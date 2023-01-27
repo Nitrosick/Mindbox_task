@@ -1,5 +1,6 @@
 {
   "name": "mindbox",
+  "homepage": "/projects/mindbox",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

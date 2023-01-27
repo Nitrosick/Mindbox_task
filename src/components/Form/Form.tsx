@@ -4,12 +4,12 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FormProps } from '../../interfaces';
 import './Form.css';
 
-export const Form: FC<FormProps> = ({ tasks, setTasks }) => {
+export const Form: FC<FormProps> = ({ addTask }) => {
   const [value, setValue] = useState<string>('');
 
-  const addTask = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTasks([...tasks, {id: (tasks[tasks.length-1].id + 1), completed: false, title: value}]);
+    addTask(value);
     setValue('');
   };
 
@@ -17,7 +17,7 @@ export const Form: FC<FormProps> = ({ tasks, setTasks }) => {
     <form
       action="#"
       className="form"
-      onSubmit={(e) => {addTask(e)}}
+      onSubmit={submitHandler}
     >
       <FontAwesomeIcon
         icon={faChevronDown}

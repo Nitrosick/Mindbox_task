@@ -1,5 +1,5 @@
-import React, { useState, useEffect, FC } from 'react';
-import { FiltersProps } from '../../interfaces';
+import { useState, FC, useMemo } from 'react';
+import { FiltersProps, FilterValues } from '../../interfaces';
 import './Filters.css';
 
 export const Filters: FC<FiltersProps> = ({
@@ -15,7 +15,7 @@ export const Filters: FC<FiltersProps> = ({
     setTasks(result);
   };
 
-  useEffect(() => {
+  useMemo(() => {
     let count = 0;
 
     tasks.forEach(el => {
@@ -30,16 +30,16 @@ export const Filters: FC<FiltersProps> = ({
         <span className="filters_left_tasks">{opened} items left</span>
         <div className="filters_states">
             <button
-              className={`filters_states_item ${filter === 'all' ? 'selected' : ''}`}
-              onClick={() => {setFilter('all')}}
+              className={`filters_states_item ${filter === FilterValues.All ? 'selected' : ''}`}
+              onClick={() => {setFilter(FilterValues.All)}}
             >All</button>
             <button
-              className={`filters_states_item ${filter === 'active' ? 'selected' : ''}`}
-              onClick={() => {setFilter('active')}}
+              className={`filters_states_item ${filter === FilterValues.Active ? 'selected' : ''}`}
+              onClick={() => {setFilter(FilterValues.Active)}}
             >Active</button>
             <button
-              className={`filters_states_item ${filter === 'completed' ? 'selected' : ''}`}
-              onClick={() => {setFilter('completed')}}
+              className={`filters_states_item ${filter === FilterValues.Completed ? 'selected' : ''}`}
+              onClick={() => {setFilter(FilterValues.Completed)}}
             >Completed</button>
         </div>
         <button

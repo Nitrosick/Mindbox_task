@@ -1,29 +1,51 @@
-import React, { useState, useEffect, FC } from 'react';
+import { useState, FC, useMemo } from 'react';
 import { Filters } from '../components/Filters/Filters';
 import { Form } from '../components/Form/Form';
 import { ListItem } from '../components/ListItem/ListItem';
-import { Task } from '../interfaces';
+import { FilterValues, Task } from '../interfaces';
 import './App.css';
 
 export const initialState: Task[] = [
-  {id: 1, completed: false, title: "Тестовое задание"},
-  {id: 2, completed: true, title: "Прекрасный код"},
-  {id: 3, completed: false, title: "Покрытие тестами"},
+  { id: 1, completed: false, title: "Тестовое задание" },
+  { id: 2, completed: true, title: "Прекрасный код" },
+  { id: 3, completed: false, title: "Покрытие тестами" },
 ]
 
 export const App: FC = () => {
-  const [filter, setFilter] = useState<string>('all');
+  const [filter, setFilter] = useState<string>(FilterValues.All);
   const [tasks, setTasks] = useState<Task[]>(initialState);
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
 
-  useEffect(() => {
+  const addTask = (value: string) => {
+    if (!tasks.length) {
+      setTasks([{ id: 1, completed: false, title: value }]);
+    } else {
+      setTasks([...tasks, { id: (tasks[tasks.length - 1].id + 1), completed: false, title: value }]);
+    }
+  };
+
+  const setCompleted = (id: number) => {
+    let temp: Task[] = [];
+
+    tasks.forEach(el => {
+      if (el.id === id) {
+        temp.push({ id: id, completed: true, title: el.title });
+      } else {
+        temp.push(el);
+      }
+    });
+
+    setTasks(temp);
+  };
+
+  useMemo(() => {
     let result = [];
 
     switch (filter) {
-      case 'active':
+      case FilterValues.Active:
         result = tasks.filter(task => !task.completed);
         break;
-      case 'completed':
+      case FilterValues.Completed:
         result = tasks.filter(task => task.completed);
         break;
       default:
@@ -41,10 +63,7 @@ export const App: FC = () => {
     >
       <h1 className="app_title">todos</h1>
       <div className="todo">
-        <Form
-          tasks={tasks}
-          setTasks={setTasks}
-        />
+        <Form addTask={addTask}/>
         <div className="todo_list">
           {filteredTasks.map((task) => (
             <ListItem
@@ -52,8 +71,7 @@ export const App: FC = () => {
               id={task.id}
               completed={task.completed}
               title={task.title}
-              tasks={tasks}
-              setTasks={setTasks}
+              setCompleted={setCompleted}
             />
           ))}
         </div>

@@ -1,35 +1,21 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { ListItemProps, Task } from '../../interfaces';
+import { ListItemProps } from '../../interfaces';
 import './ListItem.css';
 
 export const ListItem: FC<ListItemProps> = ({
   id,
   completed,
   title,
-  tasks,
-  setTasks
+  setCompleted
 }) => {
-  const setCompleted = () => {
-    let temp: Task[] = [];
-
-    tasks.forEach(el => {
-      if (el.id === id) {
-        temp.push({id: id, completed: true, title: el.title});
-      } else {
-        temp.push(el);
-      }
-    });
-
-    setTasks(temp);
-  };
 
   return (
     <div className={`list_item ${completed ? 'completed' : ''}`}>
         <button
           className="list_item_check"
-          onClick={setCompleted}
+          onClick={() => {setCompleted(id)}}
         >
             <FontAwesomeIcon
                 icon={faCheck}
